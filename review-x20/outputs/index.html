@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Untuk Kamu ✦</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+    :root { --ink:#29233d; --paper:#fff9f5; --pink:#ff6395; --yellow:#ffd84c; --lilac:#a891ff; --aqua:#62dfd0; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); font-family:'Plus Jakarta Sans',sans-serif; background:var(--paper); overflow-x:hidden; }
+    .grain { position:fixed; inset:0; z-index:10; pointer-events:none; opacity:.12; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E"); }
+    #lock { min-height:100vh; display:grid; place-items:center; position:relative; overflow:hidden; padding:24px; background:linear-gradient(135deg,#ffe2ef,#fff1bd 45%,#dffbf6); }
+    .blob { position:absolute; border-radius:50%; filter:blur(2px); animation:float 8s ease-in-out infinite; }
+    .blob.one { width:340px;height:340px;top:-130px;left:-80px;background:var(--pink); } .blob.two { width:270px;height:270px;right:-70px;bottom:-80px;background:var(--lilac);animation-delay:-3s; } .blob.three { width:130px;height:130px;right:15%;top:14%;background:var(--aqua);animation-delay:-5s; }
+    .lock-card { width:min(440px,100%); position:relative; text-align:center; padding:48px 34px 36px; border:2px solid var(--ink); border-radius:28px; background:rgba(255,255,255,.75); box-shadow:9px 9px 0 var(--ink); backdrop-filter:blur(12px); }
+    .lock-card::before { content:'✦'; position:absolute; left:-19px; top:-20px; font-size:44px; color:var(--pink); transform:rotate(-12deg); }
+    .eyebrow { font:12px 'DM Mono',monospace; letter-spacing:.16em; text-transform:uppercase; }
+    h1 { font:600 clamp(40px,10vw,64px)/.96 'Playfair Display',serif; margin:15px 0 12px; } .lock-card p { margin:0 0 27px; font-size:14px; }
+    form { display:flex; gap:9px; } input { min-width:0; flex:1; border:2px solid var(--ink); border-radius:13px; padding:14px; color:var(--ink); background:#fff; font:14px 'DM Mono',monospace; outline:none; } input:focus { box-shadow:0 0 0 4px var(--aqua); }
+    button { border:2px solid var(--ink); border-radius:13px; padding:0 18px; cursor:pointer; background:var(--yellow); color:var(--ink); font-weight:700; box-shadow:3px 3px 0 var(--ink); transition:transform .2s,box-shadow .2s; } button:hover { transform:translate(2px,2px); box-shadow:1px 1px 0 var(--ink); } #message { height:18px; margin:14px 0 0; color:#df2967; font-size:12px; }
+    #site { display:none; } #site.show { display:block; animation:reveal .75s cubic-bezier(.2,.8,.2,1) both; }
+    header { min-height:82vh; padding:24px clamp(20px,7vw,110px) 70px; background:radial-gradient(circle at 78% 23%,#ffd94d 0 12%,transparent 12.3%),radial-gradient(circle at 15% 73%,#a891ff 0 15%,transparent 15.3%),#ff8bb3; position:relative; overflow:hidden; }
+    nav { display:flex; justify-content:space-between; align-items:center; position:relative; z-index:1; font:600 13px 'DM Mono',monospace; } .mark { border:2px solid var(--ink); border-radius:50%; width:44px; height:44px; display:grid; place-items:center; background:#fff; font-size:20px; }
+    .hero { max-width:730px; margin:clamp(90px,17vh,150px) auto 0; position:relative; text-align:center; } .hero h1 { font-size:clamp(56px,11vw,125px); letter-spacing:-.07em; } .hero h1 em { color:#fff9f5; text-shadow:3px 3px 0 var(--ink); } .hero p { max-width:400px;margin:24px auto 0;line-height:1.65; }
+    .sticker { position:absolute; font-size:clamp(45px,7vw,80px); animation:spin 12s linear infinite; } .s1{left:6%;top:38%;}.s2{right:8%;top:55%;animation-direction:reverse}.s3{right:18%;top:16%;font-size:35px;}
+    main { padding:90px clamp(20px,7vw,110px); } .intro { display:flex; justify-content:space-between; align-items:end; gap:25px; margin-bottom:42px; } .intro h2 { font:600 clamp(40px,6vw,75px)/.95 'Playfair Display',serif; margin:0; letter-spacing:-.05em; } .intro p { max-width:270px; margin:0; font-size:14px; line-height:1.7; }
+    .gallery { display:grid; grid-template-columns:repeat(12,1fr); gap:20px; } .photo { min-height:270px; position:relative; overflow:hidden; border:2px solid var(--ink); border-radius:18px; background:var(--bg); box-shadow:5px 5px 0 var(--ink); transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s; } .photo:hover { transform:translateY(-8px) rotate(var(--r)); box-shadow:10px 12px 0 var(--ink); }
+    .photo::before { content:'Tambahkan foto kamu di sini'; position:absolute; inset:12px; display:grid; place-items:center; border:2px dashed rgba(41,35,61,.55); border-radius:10px; text-align:center; padding:20px; font:12px 'DM Mono',monospace; color:rgba(41,35,61,.75); } .photo.has-photo::before { display:none; } .photo img { width:100%; height:100%; object-fit:cover; display:block; position:absolute; inset:0; } .photo::after { content:attr(data-no); position:absolute; right:12px; bottom:10px; background:#fff; border:2px solid var(--ink); padding:4px 8px; border-radius:7px; font:11px 'DM Mono',monospace; }
+    .p1{grid-column:span 5;--bg:#ffc2d6;--r:-1deg}.p2{grid-column:span 7;--bg:#b4eee7;--r:1deg}.p3{grid-column:span 4;--bg:#ffe56d;--r:-1deg}.p4{grid-column:span 4;--bg:#c7b6ff;--r:1deg}.p5{grid-column:span 4;--bg:#ffb67d;--r:-1deg}.p6{grid-column:span 7;--bg:#f4c3eb;--r:1deg}.p7{grid-column:span 5;--bg:#a8d7ff;--r:-1deg}.p8{grid-column:span 12;min-height:350px;--bg:#ffdb8e;--r:0deg}
+    footer { padding:60px 20px; text-align:center; background:var(--ink); color:#fff9f5; } footer h2{margin:0;font:600 clamp(36px,7vw,76px)/1 'Playfair Display',serif} footer p{font:12px 'DM Mono',monospace;opacity:.7;margin-top:20px}
+    @keyframes float{50%{transform:translate(25px,35px) scale(1.08)}} @keyframes spin{to{transform:rotate(360deg)}} @keyframes reveal{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+    @media(max-width:600px){ form{flex-direction:column} button{padding:14px}.intro{display:block}.intro p{margin-top:20px}.gallery{gap:14px}.photo{min-height:210px}.p1,.p2,.p3,.p4,.p5,.p6,.p7{grid-column:span 6}.p8{grid-column:span 12;min-height:250px} }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+  <section id="lock"><i class="blob one"></i><i class="blob two"></i><i class="blob three"></i><div class="lock-card"><span class="eyebrow">a private little corner for dede</span><h1>Hai, Aleya!</h1><p>Masukkan password untuk membuka halaman spesial dari bb ♡</p><form id="login"><input id="password" type="password" placeholder="password..." autocomplete="off" autofocus><button type="submit">Buka ✦</button></form><div id="message"></div></div></section>
+  <div id="site"><header><nav><span>BB &amp; DEDE'S<br>MEMORIES</span><span class="mark">♡</span><span>08 / MOMENTS</span></nav><div class="hero"><span class="eyebrow">for dede aleya, from bb</span><h1>Aleya is bb's <em>favorite</em> color.</h1><p>Satu halaman kecil dari bb untuk menyimpan delapan potongan momen yang selalu bikin bb senyum karena dede.</p></div><span class="sticker s1">✿</span><span class="sticker s2">♥</span><span class="sticker s3">✦</span></header><main><div class="intro"><h2>8 little<br>moments.</h2><p>Delapan ruang kecil untuk foto-foto dede yang selalu bb sayang.</p></div><section class="gallery">
+    <article class="photo p1 has-photo" data-no="01"><img src="foto1.jpeg" alt="Aleya, foto 1"></article>
+    <article class="photo p2 has-photo" data-no="02"><img src="foto2.jpeg" alt="Aleya, foto 2"></article>
+    <article class="photo p3 has-photo" data-no="03"><img src="foto3.jpeg" alt="Aleya, foto 3"></article>
+    <!-- Untuk foto 4–8: simpan file di folder ini, lalu ganti NAMA-FILE.jpg di src. -->
+    <article class="photo p4" data-no="04"><!-- <img src="foto4.jpg" alt="Aleya, foto 4"> --></article>
+    <article class="photo p5" data-no="05"><!-- <img src="foto5.jpg" alt="Aleya, foto 5"> --></article>
+    <article class="photo p6" data-no="06"><!-- <img src="foto6.jpg" alt="Aleya, foto 6"> --></article>
+    <article class="photo p7" data-no="07"><!-- <img src="foto7.jpg" alt="Aleya, foto 7"> --></article>
+    <article class="photo p8" data-no="08"><!-- <img src="foto8.jpg" alt="Aleya, foto 8"> --></article>
+  </section></main><footer><h2>Made by bb, for dede ♡</h2><p>BB SAYANG DEDE ALEYA</p></footer></div>
+  <script>
+    const login=document.querySelector('#login'), lock=document.querySelector('#lock'), site=document.querySelector('#site'), msg=document.querySelector('#message');
+    login.addEventListener('submit', e=>{ e.preventDefault(); if(document.querySelector('#password').value==='Rakkaleya0718'){ lock.style.animation='reveal .45s reverse both'; setTimeout(()=>{lock.style.display='none';site.classList.add('show');window.scrollTo(0,0)},400) } else {msg.textContent='Password-nya belum cocok, coba lagi ya ♡';document.querySelector('#password').select()} });
+  </script>
+</body>
+</html>
